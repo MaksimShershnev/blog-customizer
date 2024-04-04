@@ -45,6 +45,11 @@
 
 .item[data-checked='true'] .label {
 	background: var(--gold, #ffc802);
+	pointer-events: none;
+}
+
+.item[data-checked='false'] .label:hover {
+	background: var(--gold, #ffc80225);
 }
 
 .container {
