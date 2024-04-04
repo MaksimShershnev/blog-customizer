@@ -14,6 +14,8 @@ const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
 const App = () => {
+	// const closeArticle = () => {};
+
 	return (
 		<div
 			className={clsx(styles.main)}
