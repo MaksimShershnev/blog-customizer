@@ -2,7 +2,7 @@ import { ArrowButton } from 'components/arrow-button';
 import { Button } from 'components/button';
 
 import styles from './ArticleParamsForm.module.scss';
-import { useRef, useState } from 'react';
+import { SyntheticEvent, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { Select } from '../select';
 import {
@@ -11,14 +11,24 @@ import {
 	backgroundColors,
 	contentWidthArr,
 	fontSizeOptions,
-	// defaultArticleState,
+	defaultArticleState,
+	ArticleStateType,
 } from 'src/constants/articleProps';
 import { RadioGroup } from '../radio-group';
 import { Separator } from '../separator';
 import { useOutsideClickClose } from '../select/hooks/useOutsideClickClose';
+import { Text } from '../text';
 
-export const ArticleParamsForm = () => {
-	const [isOpen, setIsOpen] = useState(true);
+type ArticleParamsFormProps = {
+	currentArticleState: ArticleStateType;
+	setCurrentArticleState: (articleState: ArticleStateType) => void;
+};
+
+export const ArticleParamsForm = ({
+	currentArticleState,
+	setCurrentArticleState,
+}: ArticleParamsFormProps) => {
+	const [isOpen, setIsOpen] = useState(false);
 	const formRef = useRef<HTMLDivElement>(null);
 	const [currentFontFamily, setCurrentFontFamily] = useState(
 		fontFamilyOptions[0]
@@ -31,6 +41,27 @@ export const ArticleParamsForm = () => {
 	const [currentContentWidthArr, setCurrentContentWidthArr] = useState(
 		contentWidthArr[0]
 	);
+
+	const handleFormSubmit = (e: SyntheticEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		setCurrentArticleState({
+			...currentArticleState,
+			fontFamilyOption: currentFontFamily,
+			fontSizeOption: currentFontSize,
+			fontColor: currentFontColor,
+			backgroundColor: currentBackgroundColor,
+			contentWidth: currentContentWidthArr,
+		});
+	};
+
+	const handleFormReset = () => {
+		setCurrentFontFamily(fontFamilyOptions[0]);
+		setCurrentFontSize(fontSizeOptions[0]);
+		setCurrentFontColor(fontColors[0]);
+		setCurrentBackgroundColor(backgroundColors[0]);
+		setCurrentContentWidthArr(contentWidthArr[0]);
+		setCurrentArticleState(defaultArticleState);
+	};
 
 	useOutsideClickClose({
 		isOpen,
@@ -45,7 +76,15 @@ export const ArticleParamsForm = () => {
 				className={clsx(styles.container, isOpen && styles.container_open)}
 				ref={formRef}>
 				<form className={styles.form}>
-					<h2 className={styles.form__title}>задайте параметры</h2>
+					<Text
+						as={'h2'}
+						dynamicLite={true}
+						size={31}
+						weight={800}
+						uppercase={true}
+						additionClass={'text-shadow'}>
+						задайте параметры
+					</Text>
 					<Select
 						selected={currentFontFamily}
 						options={fontFamilyOptions}
@@ -79,8 +118,8 @@ export const ArticleParamsForm = () => {
 						onChange={setCurrentContentWidthArr}
 					/>
 					<div className={styles.bottomContainer}>
-						<Button title='Сбросить' type='reset' />
-						<Button title='Применить' type='submit' />
+						<Button title='Сбросить' type='reset' onClick={handleFormReset} />
+						<Button title='Применить' type='submit' onClick={handleFormSubmit} />
 					</div>
 				</form>
 			</aside>
