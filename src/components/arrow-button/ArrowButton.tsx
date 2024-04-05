@@ -9,12 +9,12 @@ export type OnClick = () => void;
 
 type ArrowButtonProps = {
 	isOpen: boolean;
-	setIsOpen?: (isOpen: boolean) => void;
+	setIsOpen: (isOpen: boolean) => void;
 };
 
 export const ArrowButton = ({ isOpen, setIsOpen }: ArrowButtonProps) => {
 	const handleClick: OnClick = () => {
-		setIsOpen?.(!isOpen);
+		setIsOpen(!isOpen);
 	};
 
 	return (

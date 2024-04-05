@@ -31,27 +31,32 @@ export const ArticleParamsForm = ({
 	const [isOpen, setIsOpen] = useState(false);
 	const formRef = useRef<HTMLDivElement>(null);
 	const [currentFontFamily, setCurrentFontFamily] = useState(
-		fontFamilyOptions[0]
+		currentArticleState.fontFamilyOption
 	);
-	const [currentFontSize, setCurrentFontSize] = useState(fontSizeOptions[0]);
-	const [currentFontColor, setCurrentFontColor] = useState(fontColors[0]);
+	const [currentFontSize, setCurrentFontSize] = useState(
+		currentArticleState.fontSizeOption
+	);
+	const [currentFontColor, setCurrentFontColor] = useState(
+		currentArticleState.fontColor
+	);
 	const [currentBackgroundColor, setCurrentBackgroundColor] = useState(
-		backgroundColors[0]
+		currentArticleState.backgroundColor
 	);
 	const [currentContentWidthArr, setCurrentContentWidthArr] = useState(
-		contentWidthArr[0]
+		currentArticleState.contentWidth
 	);
+
+	const formState = {
+		fontFamilyOption: currentFontFamily,
+		fontSizeOption: currentFontSize,
+		fontColor: currentFontColor,
+		backgroundColor: currentBackgroundColor,
+		contentWidth: currentContentWidthArr,
+	};
 
 	const handleFormSubmit = (e: SyntheticEvent<HTMLButtonElement>) => {
 		e.preventDefault();
-		setCurrentArticleState({
-			...currentArticleState,
-			fontFamilyOption: currentFontFamily,
-			fontSizeOption: currentFontSize,
-			fontColor: currentFontColor,
-			backgroundColor: currentBackgroundColor,
-			contentWidth: currentContentWidthArr,
-		});
+		setCurrentArticleState(formState);
 	};
 
 	const handleFormReset = () => {
