@@ -1,10 +1,10 @@
-import { ArrowButton } from 'components/arrow-button';
-import { Button } from 'components/button';
-
 import styles from './ArticleParamsForm.module.scss';
+
 import { SyntheticEvent, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { Select } from '../select';
+import { ArrowButton } from 'components/arrow-button';
+import { Button } from 'components/button';
 import {
 	fontFamilyOptions,
 	fontColors,
