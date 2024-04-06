@@ -1,6 +1,6 @@
 import styles from './ArticleParamsForm.module.scss';
 
-import { SyntheticEvent, useRef, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { Select } from '../select';
 import { ArrowButton } from 'components/arrow-button';
@@ -29,7 +29,7 @@ export const ArticleParamsForm = ({
 	setCurrentArticleState,
 }: ArticleParamsFormProps) => {
 	const [isOpen, setIsOpen] = useState(false);
-	const formRef = useRef<HTMLDivElement>(null);
+	const formRef = useRef<HTMLDivElement | null>(null);
 	const [currentFontFamily, setCurrentFontFamily] = useState(
 		currentArticleState.fontFamilyOption
 	);
@@ -46,15 +46,14 @@ export const ArticleParamsForm = ({
 		currentArticleState.contentWidth
 	);
 
-	const formState = {
-		fontFamilyOption: currentFontFamily,
-		fontSizeOption: currentFontSize,
-		fontColor: currentFontColor,
-		backgroundColor: currentBackgroundColor,
-		contentWidth: currentContentWidthArr,
-	};
-
-	const handleFormSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
+	const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+		const formState = {
+			fontFamilyOption: currentFontFamily,
+			fontSizeOption: currentFontSize,
+			fontColor: currentFontColor,
+			backgroundColor: currentBackgroundColor,
+			contentWidth: currentContentWidthArr,
+		};
 		e.preventDefault();
 		setCurrentArticleState(formState);
 	};
@@ -76,7 +75,7 @@ export const ArticleParamsForm = ({
 
 	return (
 		<>
-			<ArrowButton isOpen={isOpen} setIsOpen={setIsOpen} />
+			<ArrowButton isOpen={isOpen} setIsOpen={() => setIsOpen(!isOpen)} />
 			<aside
 				className={clsx(styles.container, isOpen && styles.container_open)}
 				ref={formRef}>

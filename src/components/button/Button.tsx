@@ -1,7 +1,6 @@
 import { Text } from 'components/text';
 
 import styles from './Button.module.scss';
-import { SyntheticEvent } from 'react';
 
 export const Button = ({
 	title,
@@ -9,7 +8,7 @@ export const Button = ({
 	type,
 }: {
 	title: string;
-	onClick?: (e: SyntheticEvent<HTMLButtonElement>) => void;
+	onClick?: () => void;
 	type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
 }) => {
 	return (
