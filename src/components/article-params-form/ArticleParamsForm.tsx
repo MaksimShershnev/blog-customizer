@@ -54,17 +54,17 @@ export const ArticleParamsForm = ({
 		contentWidth: currentContentWidthArr,
 	};
 
-	const handleFormSubmit = (e: SyntheticEvent<HTMLButtonElement>) => {
+	const handleFormSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setCurrentArticleState(formState);
 	};
 
 	const handleFormReset = () => {
-		setCurrentFontFamily(fontFamilyOptions[0]);
-		setCurrentFontSize(fontSizeOptions[0]);
-		setCurrentFontColor(fontColors[0]);
-		setCurrentBackgroundColor(backgroundColors[0]);
-		setCurrentContentWidthArr(contentWidthArr[0]);
+		setCurrentFontFamily(defaultArticleState.fontFamilyOption);
+		setCurrentFontSize(defaultArticleState.fontSizeOption);
+		setCurrentFontColor(defaultArticleState.fontColor);
+		setCurrentBackgroundColor(defaultArticleState.backgroundColor);
+		setCurrentContentWidthArr(defaultArticleState.contentWidth);
 		setCurrentArticleState(defaultArticleState);
 	};
 
@@ -80,14 +80,11 @@ export const ArticleParamsForm = ({
 			<aside
 				className={clsx(styles.container, isOpen && styles.container_open)}
 				ref={formRef}>
-				<form className={styles.form}>
-					<Text
-						as={'h2'}
-						dynamicLite={true}
-						size={31}
-						weight={800}
-						uppercase={true}
-						additionClass={'text-shadow'}>
+				<form
+					className={styles.form}
+					onSubmit={handleFormSubmit}
+					onReset={handleFormReset}>
+					<Text as={'h2'} size={31} weight={800} uppercase={true}>
 						задайте параметры
 					</Text>
 					<Select
@@ -123,8 +120,8 @@ export const ArticleParamsForm = ({
 						onChange={setCurrentContentWidthArr}
 					/>
 					<div className={styles.bottomContainer}>
-						<Button title='Сбросить' type='reset' onClick={handleFormReset} />
-						<Button title='Применить' type='submit' onClick={handleFormSubmit} />
+						<Button title='Сбросить' type='reset' />
+						<Button title='Применить' type='submit' />
 					</div>
 				</form>
 			</aside>

@@ -97,13 +97,3 @@
 	color: var(--font-color, #00000025);
 	font-family: var(--font-family, 'Open Sans');
 }
-
-.text-shadow {
-	text-shadow: 0 2px 2px var(--font-color, #00000025);
-}
-
-@supports ((-webkit-text-stroke: 1px var(--font-color, #00000025))) {
-	.text-shadow {
-		-webkit-text-stroke: 1px var(--font-color, #00000025);
-	}
-}
