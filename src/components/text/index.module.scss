@@ -8,7 +8,7 @@
 }
 
 .text {
-	@include typography(18, 400, 'Open Sans');
+	@include typography(18px, 400, 'Open Sans');
 }
 
 .open-sans {
@@ -94,6 +94,6 @@
 // для заголовка и подзаголовка рамер шрифта одинаковый, меняется только цвет и семейство шрифтов
 
 .dynamicLite {
-	color: var(--font-color, #000000);
+	color: var(--font-color, #00000025);
 	font-family: var(--font-family, 'Open Sans');
 }

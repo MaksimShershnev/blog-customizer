@@ -53,8 +53,8 @@ export const SelectStory: Story = {
 			<Text {...args}>
 				Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, nulla.
 				Itaque laudantium quas repudiandae delectus voluptates fuga veritatis.
-				Necessitatibus omnis sequi repudiandae, porro est possimus ullam
-				inventore dolores rem molestiae.
+				Necessitatibus omnis sequi repudiandae, porro est possimus ullam inventore
+				dolores rem molestiae.
 			</Text>
 		);
 	},
